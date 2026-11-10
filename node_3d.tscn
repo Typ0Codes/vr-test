@@ -2,11 +2,52 @@
 
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://btknduttnmoxf" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_noarx"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="3_i5arm"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="3_jka67"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="4_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="5_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_6iypd"]
+[ext_resource type="Script" uid="uid://bp048k3fcdvo3" path="res://addons/godot-xr-tools/overrides/ground_physics.gd" id="8_jsk3o"]
+[ext_resource type="Script" uid="uid://cjfu28jmrajlo" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="9_4arys"]
+
+[sub_resource type="Resource" id="Resource_6iypd"]
+script = ExtResource("9_4arys")
+flags = 16
+jump_velocity = 5.0
+metadata/_custom_type_script = "uid://cjfu28jmrajlo"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4arys"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_noarx"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
 size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vjdmf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_imb7x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iypd"]
+
+[sub_resource type="Resource" id="Resource_4arys"]
+script = ExtResource("9_4arys")
+flags = 16
+metadata/_custom_type_script = "uid://cjfu28jmrajlo"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wc5p8"]
+
+[sub_resource type="Sky" id="Sky_wc5p8"]
+sky_material = SubResource("ProceduralSkyMaterial_wc5p8")
+
+[sub_resource type="Environment" id="Environment_wc5p8"]
+background_mode = 2
+background_color = Color(0.31990442, 0.6840145, 0.99999994, 1)
+sky = SubResource("Sky_wc5p8")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.9
+ambient_light_energy = 1.98
 
 [node name="Node3D" type="Node3D" unique_id=674221710]
 
@@ -19,8 +60,30 @@ size = Vector2(20, 20)
 [node name="XRController3D_left" type="XRController3D" parent="XROrigin3D" unique_id=946881567]
 tracker = &"left_hand"
 
+[node name="MovementDirect" parent="XROrigin3D/XRController3D_left" unique_id=1971414974 instance=ExtResource("3_r3fl7")]
+strafe = true
+
+[node name="LeftHand" parent="XROrigin3D/XRController3D_left" unique_id=1487116850 instance=ExtResource("3_i5arm")]
+
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=369866073]
 tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/XRController3D_right" unique_id=424135824 instance=ExtResource("4_wc5p8")]
+
+[node name="MovementJump" parent="XROrigin3D/XRController3D_right" unique_id=1499809723 instance=ExtResource("5_wc5p8")]
+jump_button_action = "ax_button"
+
+[node name="MovementTurn" parent="XROrigin3D/XRController3D_right" unique_id=125503201 instance=ExtResource("6_6iypd")]
+turn_mode = 1
+
+[node name="PlayerBody" parent="XROrigin3D" unique_id=1094785083 instance=ExtResource("3_jka67")]
+physics = SubResource("Resource_6iypd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/PlayerBody" unique_id=433610911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4995123, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="XROrigin3D/PlayerBody" unique_id=1884276348]
+mesh = SubResource("CapsuleMesh_4arys")
 
 [node name="StartXR" parent="." unique_id=941679495 instance=ExtResource("1_a202f")]
 enable_passthrough = true
@@ -33,3 +96,20 @@ shape = SubResource("WorldBoundaryShape3D_noarx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=953985148]
 mesh = SubResource("PlaneMesh_noarx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=24406880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1282845, 0.040391684, 0)
+shape = SubResource("BoxShape3D_vjdmf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D" unique_id=874633954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1282845, 0.040391684, 0)
+mesh = SubResource("BoxMesh_imb7x")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iypd")
+
+[node name="XRToolsGroundPhysics" type="Node" parent="StaticBody3D" unique_id=1938533608]
+script = ExtResource("8_jsk3o")
+physics = SubResource("Resource_4arys")
+metadata/_custom_type_script = "uid://bp048k3fcdvo3"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1899553218]
+environment = SubResource("Environment_wc5p8")
