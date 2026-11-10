@@ -35,5 +35,6 @@ rendering_device/driver.windows="d3d12"
 [xr]
 
 openxr/enabled=true
+openxr/default_action_map=""
 openxr/extensions/render_model=true
 shaders/enabled=true
