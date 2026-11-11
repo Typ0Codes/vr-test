@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cskywls62cv43"]
 
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_a202f"]
+[ext_resource type="Script" uid="uid://du7gxcanyu30b" path="res://xr_camera_3d.gd" id="1_ealrb"]
 [ext_resource type="PackedScene" uid="uid://btknduttnmoxf" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_noarx"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="3_i5arm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="3_jka67"]
@@ -90,6 +91,7 @@ metadata/_custom_type_script = "uid://dvobm6vcfnqe8"
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1999180124]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1750148988]
+script = ExtResource("1_ealrb")
 
 [node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" unique_id=214917585 instance=ExtResource("1_noarx")]
 
