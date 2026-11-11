@@ -5,11 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="3_i5arm"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="3_jka67"]
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_cdqbm"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="4_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="5_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_6iypd"]
 [ext_resource type="Script" uid="uid://bp048k3fcdvo3" path="res://addons/godot-xr-tools/overrides/ground_physics.gd" id="8_jsk3o"]
 [ext_resource type="Script" uid="uid://cjfu28jmrajlo" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="9_4arys"]
+[ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="10_imku0"]
+[ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://addons/Mirror3D/Mirror3D.tscn" id="11_tereu"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="11_wlxy5"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="12_3v7ru"]
+[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="15_tuemg"]
+[ext_resource type="Script" uid="uid://dvobm6vcfnqe8" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="16_i0g27"]
+[ext_resource type="Animation" uid="uid://daqddcrbpam0c" path="res://addons/godot-xr-tools/hands/animations/right/Grip 1.res" id="18_i0g27"]
 
 [sub_resource type="Resource" id="Resource_6iypd"]
 script = ExtResource("9_4arys")
@@ -18,6 +26,12 @@ jump_velocity = 5.0
 metadata/_custom_type_script = "uid://cjfu28jmrajlo"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4arys"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6iypd"]
+size = Vector3(1, 0.27441406, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tereu"]
+albedo_color = Color(1, 0, 1, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_noarx"]
 
@@ -49,6 +63,28 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.9
 ambient_light_energy = 1.98
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_i0g27"]
+size = Vector3(10.179474, 4.906372, 0.100097656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imku0"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_imku0"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imku0"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_3v7ru"]
+script = ExtResource("16_i0g27")
+closed_pose = ExtResource("15_tuemg")
+metadata/_custom_type_script = "uid://dvobm6vcfnqe8"
+
+[sub_resource type="Resource" id="Resource_ealrb"]
+script = ExtResource("16_i0g27")
+closed_pose = ExtResource("18_i0g27")
+metadata/_custom_type_script = "uid://dvobm6vcfnqe8"
+
 [node name="Node3D" type="Node3D" unique_id=674221710]
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1999180124]
@@ -65,6 +101,9 @@ strafe = true
 
 [node name="LeftHand" parent="XROrigin3D/XRController3D_left" unique_id=1487116850 instance=ExtResource("3_i5arm")]
 
+[node name="FunctionPickup" parent="XROrigin3D/XRController3D_left" unique_id=1789910387 instance=ExtResource("4_cdqbm")]
+grab_distance = 0.5
+
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=369866073]
 tracker = &"right_hand"
 
@@ -76,6 +115,9 @@ jump_button_action = "ax_button"
 [node name="MovementTurn" parent="XROrigin3D/XRController3D_right" unique_id=125503201 instance=ExtResource("6_6iypd")]
 turn_mode = 1
 
+[node name="FunctionPickup" parent="XROrigin3D/XRController3D_right" unique_id=554481369 instance=ExtResource("4_cdqbm")]
+grab_distance = 0.5
+
 [node name="PlayerBody" parent="XROrigin3D" unique_id=1094785083 instance=ExtResource("3_jka67")]
 physics = SubResource("Resource_6iypd")
 
@@ -83,7 +125,12 @@ physics = SubResource("Resource_6iypd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4995123, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="XROrigin3D/PlayerBody" unique_id=1884276348]
+visible = false
 mesh = SubResource("CapsuleMesh_4arys")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="XROrigin3D/PlayerBody" unique_id=2018415214]
+mesh = SubResource("BoxMesh_6iypd")
+surface_material_override/0 = SubResource("StandardMaterial3D_tereu")
 
 [node name="StartXR" parent="." unique_id=941679495 instance=ExtResource("1_a202f")]
 enable_passthrough = true
@@ -101,8 +148,17 @@ mesh = SubResource("PlaneMesh_noarx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1282845, 0.040391684, 0)
 shape = SubResource("BoxShape3D_vjdmf")
 
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=115901153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1282845, 0.5001057, -0.9304975)
+shape = SubResource("BoxShape3D_vjdmf")
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D" unique_id=874633954]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1282845, 0.040391684, 0)
+mesh = SubResource("BoxMesh_imb7x")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iypd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D" unique_id=267632727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1282845, 0.50108397, -0.929631)
 mesh = SubResource("BoxMesh_imb7x")
 surface_material_override/0 = SubResource("StandardMaterial3D_6iypd")
 
@@ -113,3 +169,33 @@ metadata/_custom_type_script = "uid://bp048k3fcdvo3"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1899553218]
 environment = SubResource("Environment_wc5p8")
+
+[node name="Mirror3D" parent="." unique_id=916837440 instance=ExtResource("11_tereu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.936421)
+size = Vector2(10, 5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mirror3D" unique_id=35902983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015914917, 1.953186, -0.002661705)
+shape = SubResource("BoxShape3D_i0g27")
+
+[node name="XRToolsPickable" type="RigidBody3D" parent="." unique_id=648767933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0274642, 0.6779134, -0.9707815)
+collision_layer = 4
+collision_mask = 196615
+script = ExtResource("10_imku0")
+metadata/_custom_type_script = "uid://bfrlpbsqg5lqr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XRToolsPickable" unique_id=667866368]
+shape = SubResource("BoxShape3D_imku0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="XRToolsPickable" unique_id=320885083]
+mesh = SubResource("BoxMesh_imku0")
+surface_material_override/0 = SubResource("StandardMaterial3D_imku0")
+
+[node name="GrabPointHandLeft" parent="XRToolsPickable" unique_id=242662758 instance=ExtResource("11_wlxy5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029365301, -0.023812413)
+hand_pose = SubResource("Resource_3v7ru")
+
+[node name="GrabPointHandRight" parent="XRToolsPickable" unique_id=1922396546 instance=ExtResource("12_3v7ru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035678804, -0.02303493)
+hand_pose = SubResource("Resource_ealrb")
