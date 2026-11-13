@@ -215,18 +215,20 @@ size = Vector2(20, 20)
 [sub_resource type="QuadMesh" id="QuadMesh_lggff"]
 size = Vector2(8, 4.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_s0gvp"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_m7uci"]
 viewport_path = NodePath("TV/SubViewport")
+
+[sub_resource type="CefTexture2D" id="CefTexture2D_lggff"]
+url = "https://one.one.one.one/"
+popup_policy = 1
+permission_policy = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lggff"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_s0gvp")
+albedo_texture = SubResource("ViewportTexture_m7uci")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lggff"]
 size = Vector3(8, 4.5, 0.001)
-
-[sub_resource type="NativeVideoStream" id="NativeVideoStream_vxd74"]
-file = "file:///home/espen/Videos/Jellyfin_Temp/%5BJudas%5D Kamiina Botan - S01E07.mkv"
 
 [node name="Node3D" type="Node3D" unique_id=674221710]
 
@@ -397,11 +399,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lggff")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TV" unique_id=1240719891]
 shape = SubResource("BoxShape3D_lggff")
 
-[node name="SubViewport" type="SubViewport" parent="TV" unique_id=1792204673]
-size = Vector2i(1920, 1080)
+[node name="SubViewport" type="SubViewport" parent="TV" unique_id=1122427050]
+disable_3d = true
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="TV/SubViewport" unique_id=953567669]
-offset_right = 40.0
-offset_bottom = 40.0
-stream = SubResource("NativeVideoStream_vxd74")
-autoplay = true
+[node name="ColorRect" type="ColorRect" parent="TV/SubViewport" unique_id=1728775938]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

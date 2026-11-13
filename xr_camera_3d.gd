@@ -1,6 +1,7 @@
 extends XRCamera3D
 
 func _ready() -> void:
+	return
 	var quad := QuadMesh.new()
 	quad.size = Vector2(2, 2)
 

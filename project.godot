@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VR Test"
-run/main_scene="uid://cskywls62cv43"
+run/main_scene="uid://javb1fr2sj10"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,7 +27,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/gde_gozen/plugin.cfg", "res://addons/gde_gozen_real/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
 
 [physics]
 
