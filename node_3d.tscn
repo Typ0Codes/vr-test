@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_6iypd"]
 [ext_resource type="Script" uid="uid://bp048k3fcdvo3" path="res://addons/godot-xr-tools/overrides/ground_physics.gd" id="8_jsk3o"]
 [ext_resource type="Script" uid="uid://cjfu28jmrajlo" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="9_4arys"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="9_vxd74"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="10_imku0"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="11_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="12_3v7ru"]
@@ -21,7 +22,17 @@
 [ext_resource type="Texture2D" uid="uid://dsgkhees4cg25" path="res://handheld_game_console_1_handheld_game_console_1.png" id="20_jsnrv"]
 [ext_resource type="Texture2D" uid="uid://drswjq2vmy56r" path="res://cig_1_cigs_packet_1.png" id="21_lggff"]
 [ext_resource type="Texture2D" uid="uid://cartwp8ny7d04" path="res://knife_mp_1_knife_mp_1.png" id="22_s0gvp"]
-[ext_resource type="Script" uid="uid://ivx7m2bfysip" path="res://addons/gde_gozen/video_playback.gd" id="22_vxd74"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="23_vxd74"]
+[ext_resource type="PackedScene" uid="uid://d0x6rj5t2k3b1" path="res://TV.tscn" id="24_dhlwf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5t8nk"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.5058824)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxd74"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3e5s"]
 
 [sub_resource type="Resource" id="Resource_6iypd"]
 script = ExtResource("9_4arys")
@@ -213,19 +224,6 @@ size = Vector3(0.43839255, 0.026400004, 0.08188969)
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
 size = Vector2(20, 20)
 
-[sub_resource type="QuadMesh" id="QuadMesh_lggff"]
-size = Vector2(8, 4.5)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_m7uci"]
-viewport_path = NodePath("TV/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lggff"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_m7uci")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_lggff"]
-size = Vector3(8, 4.5, 0.001)
-
 [node name="Node3D" type="Node3D" unique_id=674221710]
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1999180124]
@@ -259,6 +257,14 @@ turn_mode = 1
 
 [node name="FunctionPickup" parent="XROrigin3D/XRController3D_right" unique_id=554481369 instance=ExtResource("4_cdqbm")]
 grab_distance = 0.5
+
+[node name="FunctionPointer" parent="XROrigin3D/XRController3D_right" unique_id=1758934996 instance=ExtResource("9_vxd74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.05, -0.1)
+show_laser = 2
+laser_material = SubResource("StandardMaterial3D_5t8nk")
+laser_hit_material = SubResource("StandardMaterial3D_vxd74")
+show_target = true
+target_material = SubResource("StandardMaterial3D_j3e5s")
 
 [node name="PlayerBody" parent="XROrigin3D" unique_id=1094785083 instance=ExtResource("3_jka67")]
 physics = SubResource("Resource_6iypd")
@@ -385,36 +391,10 @@ shape = SubResource("WorldBoundaryShape3D_noarx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.61024237, 0)
 mesh = SubResource("PlaneMesh_noarx")
 
-[node name="TV" type="StaticBody3D" parent="." unique_id=1657700615]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6696439, -9.035514)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TV" unique_id=1598974098]
-mesh = SubResource("QuadMesh_lggff")
-surface_material_override/0 = SubResource("StandardMaterial3D_lggff")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TV" unique_id=1240719891]
-shape = SubResource("BoxShape3D_lggff")
-
-[node name="SubViewport" type="SubViewport" parent="TV" unique_id=1122427050]
-disable_3d = true
-size = Vector2i(1920, 1080)
-
-[node name="ColorRect" type="ColorRect" parent="TV/SubViewport" unique_id=1728775938]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0, 1, 1)
-
-[node name="VideoPlayback" type="Control" parent="TV/SubViewport" unique_id=2143506189]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("22_vxd74")
-path = "file:///home/espen/Videos/Jellyfin_Temp/[Judas] Kamiina Botan - S01E08.mkv"
-enable_auto_play = true
-metadata/_custom_type_script = "uid://ivx7m2bfysip"
+[node name="Viewport2Din3D" parent="." unique_id=582205747 instance=ExtResource("23_vxd74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5334053, -8.425869)
+screen_size = Vector2(6, 4)
+scene = ExtResource("24_dhlwf")
+viewport_size = Vector2(640, 360)
+transparent = 1
+scene_properties_keys = PackedStringArray()

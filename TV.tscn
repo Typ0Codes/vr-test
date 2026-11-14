@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://d0x6rj5t2k3b1"]
+
+[ext_resource type="Script" uid="uid://docji5i4m05rc" path="res://VideoControl.gd" id="1_10qcn"]
+[ext_resource type="Script" uid="uid://ivx7m2bfysip" path="res://addons/gde_gozen/video_playback.gd" id="1_tu7q1"]
+
+[node name="TV" type="CanvasLayer" unique_id=831133783]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=882415323]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1415582740]
+custom_minimum_size = Vector2(0, 37.245)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -37.244995
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="Control" type="Control" parent="." unique_id=16978337]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_10qcn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=913216843]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control/VBoxContainer" unique_id=1587022375]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VideoPlayback" type="Control" parent="Control/VBoxContainer/Control" unique_id=758453543]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_tu7q1")
+path = "/home/espen/Videos/Jellyfin_Temp/[Judas] Kamiina Botan - S01E08.mkv"
+enable_auto_play = true
+metadata/_custom_type_script = "uid://ivx7m2bfysip"
+
+[node name="UI" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1423715038]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer/UI" unique_id=549139904]
+custom_minimum_size = Vector2(198.095, 0)
+layout_mode = 2
+placeholder_text = "URL Or Path"
+
+[node name="SubToggle" type="CheckButton" parent="Control/VBoxContainer/UI" unique_id=541622103]
+layout_mode = 2
+text = "Subtitles"
+
+[node name="SubTrack" type="OptionButton" parent="Control/VBoxContainer/UI" unique_id=2104580844]
+layout_mode = 2
