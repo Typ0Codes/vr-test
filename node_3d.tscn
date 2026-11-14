@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dsgkhees4cg25" path="res://handheld_game_console_1_handheld_game_console_1.png" id="20_jsnrv"]
 [ext_resource type="Texture2D" uid="uid://drswjq2vmy56r" path="res://cig_1_cigs_packet_1.png" id="21_lggff"]
 [ext_resource type="Texture2D" uid="uid://cartwp8ny7d04" path="res://knife_mp_1_knife_mp_1.png" id="22_s0gvp"]
+[ext_resource type="Script" uid="uid://ivx7m2bfysip" path="res://addons/gde_gozen/video_playback.gd" id="22_vxd74"]
 
 [sub_resource type="Resource" id="Resource_6iypd"]
 script = ExtResource("9_4arys")
@@ -218,11 +219,6 @@ size = Vector2(8, 4.5)
 [sub_resource type="ViewportTexture" id="ViewportTexture_m7uci"]
 viewport_path = NodePath("TV/SubViewport")
 
-[sub_resource type="CefTexture2D" id="CefTexture2D_lggff"]
-url = "https://one.one.one.one/"
-popup_policy = 1
-permission_policy = 1
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lggff"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_m7uci")
@@ -401,6 +397,7 @@ shape = SubResource("BoxShape3D_lggff")
 
 [node name="SubViewport" type="SubViewport" parent="TV" unique_id=1122427050]
 disable_3d = true
+size = Vector2i(1920, 1080)
 
 [node name="ColorRect" type="ColorRect" parent="TV/SubViewport" unique_id=1728775938]
 anchors_preset = 15
@@ -408,3 +405,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 0, 1, 1)
+
+[node name="VideoPlayback" type="Control" parent="TV/SubViewport" unique_id=2143506189]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_vxd74")
+path = "file:///home/espen/Videos/Jellyfin_Temp/[Judas] Kamiina Botan - S01E08.mkv"
+enable_auto_play = true
+metadata/_custom_type_script = "uid://ivx7m2bfysip"
