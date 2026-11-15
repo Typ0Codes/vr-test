@@ -86,6 +86,8 @@ func _open_video(path: String) -> void:
 	path = _normalize_path(path)
 	current_video_path = path
 	_clear_subs()
+	if video.is_open():
+		video.close()
 	video.set_video_path(path)
 	video.play()
 
@@ -900,15 +902,13 @@ func _update_thebarthingatthebottomofvideoplayers() -> void:
 
 
 func _on_button_2_pressed() -> void:
-	input.text =  DisplayServer.clipboard_get()
-	print("submitted: ", input.text)
-	var text = input.text.strip_edges()
-	if text == "":
+	var clip := DisplayServer.clipboard_get().strip_edges()
+	print("clipboard: '", clip, "'")
+	if clip == "":
 		return
-	if _is_youtube(input.text):
-		_load_youtube(input.text)
-	else:
-		_load_file(input.text)
+	input.text = clip
+	input.release_focus()    # also hides the VR keyboard if it was open
+	_on_submitted(clip)
 	
 	
 func _find_deno() -> String:

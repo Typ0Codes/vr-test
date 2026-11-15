@@ -404,6 +404,7 @@ scene_properties_keys = PackedStringArray()
 [node name="KeyboardRig" type="Node3D" parent="." unique_id=176454555 node_paths=PackedStringArray("keyboard")]
 script = ExtResource("25_j3e5s")
 keyboard = NodePath("VirtualKeyboard")
+distance = 1.0
 
 [node name="VirtualKeyboard" parent="KeyboardRig" unique_id=1577819478 instance=ExtResource("26_nu31w")]
 scene_properties_keys = PackedStringArray("virtual_keyboard_2d.gd")
