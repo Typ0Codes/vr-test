@@ -26,6 +26,11 @@
 [ext_resource type="PackedScene" uid="uid://d0x6rj5t2k3b1" path="res://TV.tscn" id="24_dhlwf"]
 [ext_resource type="Script" uid="uid://4wa3w67j7g8w" path="res://keyboard_rig.gd" id="25_j3e5s"]
 [ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="26_nu31w"]
+[ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://addons/Mirror3D/Mirror3D.tscn" id="27_nu31w"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_j3e5s"]
+radius = 0.1
+height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5t8nk"]
 transparency = 1
@@ -226,6 +231,19 @@ size = Vector3(0.43839255, 0.026400004, 0.08188969)
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
 size = Vector2(20, 20)
 
+[sub_resource type="PrismMesh" id="PrismMesh_vjdmf"]
+left_to_right = 0.0
+size = Vector3(4.78, 2.325, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j3e5s"]
+data = PackedVector3Array(-2.3899999, 1.1625, 0.5, 2.3899999, -1.1625, 0.5, -2.3899999, -1.1625, 0.5, -2.3899999, 1.1625, -0.5, -2.3899999, -1.1625, -0.5, 2.3899999, -1.1625, -0.5, -2.3899999, 1.1625, 0.5, -2.3899999, 1.1625, -0.5, 2.3899999, -1.1625, 0.5, -2.3899999, 1.1625, -0.5, 2.3899999, -1.1625, -0.5, 2.3899999, -1.1625, 0.5, -2.3899999, 1.1625, -0.5, -2.3899999, 1.1625, 0.5, -2.3899999, -1.1625, -0.5, -2.3899999, 1.1625, 0.5, -2.3899999, -1.1625, 0.5, -2.3899999, -1.1625, -0.5, -2.3899999, -1.1625, 0.5, 2.3899999, -1.1625, 0.5, -2.3899999, -1.1625, -0.5, 2.3899999, -1.1625, 0.5, 2.3899999, -1.1625, -0.5, -2.3899999, -1.1625, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s01gi"]
+size = Vector3(1, 0.27355957, 6.813843)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nu31w"]
+data = PackedVector3Array(-0.5, 0.13679999, 3.4069, 0.5, 0.13679999, 3.4069, -0.5, -0.13679999, 3.4069, 0.5, 0.13679999, 3.4069, 0.5, -0.13679999, 3.4069, -0.5, -0.13679999, 3.4069, 0.5, 0.13679999, -3.4069, -0.5, 0.13679999, -3.4069, 0.5, -0.13679999, -3.4069, -0.5, 0.13679999, -3.4069, -0.5, -0.13679999, -3.4069, 0.5, -0.13679999, -3.4069, 0.5, 0.13679999, 3.4069, 0.5, 0.13679999, -3.4069, 0.5, -0.13679999, 3.4069, 0.5, 0.13679999, -3.4069, 0.5, -0.13679999, -3.4069, 0.5, -0.13679999, 3.4069, -0.5, 0.13679999, -3.4069, -0.5, 0.13679999, 3.4069, -0.5, -0.13679999, -3.4069, -0.5, 0.13679999, 3.4069, -0.5, -0.13679999, 3.4069, -0.5, -0.13679999, -3.4069, 0.5, 0.13679999, 3.4069, -0.5, 0.13679999, 3.4069, 0.5, 0.13679999, -3.4069, -0.5, 0.13679999, 3.4069, -0.5, 0.13679999, -3.4069, 0.5, 0.13679999, -3.4069, -0.5, -0.13679999, 3.4069, 0.5, -0.13679999, 3.4069, -0.5, -0.13679999, -3.4069, 0.5, -0.13679999, 3.4069, 0.5, -0.13679999, -3.4069, -0.5, -0.13679999, -3.4069)
+
 [node name="Node3D" type="Node3D" unique_id=674221710]
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1999180124]
@@ -234,6 +252,9 @@ size = Vector2(20, 20)
 script = ExtResource("1_ealrb")
 
 [node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" unique_id=214917585 instance=ExtResource("1_noarx")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D" unique_id=1542767306]
+mesh = SubResource("SphereMesh_j3e5s")
 
 [node name="XRController3D_left" type="XRController3D" parent="XROrigin3D" unique_id=946881567]
 tracker = &"left_hand"
@@ -408,3 +429,25 @@ distance = 1.0
 
 [node name="VirtualKeyboard" parent="KeyboardRig" unique_id=1577819478 instance=ExtResource("26_nu31w")]
 scene_properties_keys = PackedStringArray("virtual_keyboard_2d.gd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1820409857]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1812527944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.051824, 0.47025204, 0)
+mesh = SubResource("PrismMesh_vjdmf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1579389098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.051824, 0.47025204, 0)
+shape = SubResource("ConcavePolygonShape3D_j3e5s")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D" unique_id=1628307403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.993122, 1.5147047, 2.9069214)
+mesh = SubResource("BoxMesh_s01gi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1927228383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.993122, 1.5147047, 2.9069214)
+shape = SubResource("ConcavePolygonShape3D_nu31w")
+
+[node name="Mirror3D" parent="." unique_id=916837440 instance=ExtResource("27_nu31w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.817281)
+size = Vector2(10, 10)
