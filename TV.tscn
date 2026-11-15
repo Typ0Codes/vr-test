@@ -3,6 +3,30 @@
 [ext_resource type="Script" uid="uid://docji5i4m05rc" path="res://VideoControl.gd" id="1_10qcn"]
 [ext_resource type="Script" uid="uid://ivx7m2bfysip" path="res://addons/gde_gozen/video_playback.gd" id="1_tu7q1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10qcn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bb8b"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.044163756, 0.41086033, 2.8878452e-07, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
 [node name="TV" type="CanvasLayer" unique_id=831133783]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=882415323]
@@ -55,17 +79,21 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_tu7q1")
 path = "/home/espen/Videos/Jellyfin_Temp/[Judas] Kamiina Botan - S01E08.mkv"
-enable_auto_play = true
 metadata/_custom_type_script = "uid://ivx7m2bfysip"
 
 [node name="UI" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1423715038]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_constants/separation = 10
 
 [node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer/UI" unique_id=549139904]
 custom_minimum_size = Vector2(198.095, 0)
 layout_mode = 2
 placeholder_text = "URL Or Path"
+
+[node name="Button2" type="Button" parent="Control/VBoxContainer/UI" unique_id=1412839607]
+layout_mode = 2
+text = "Paste"
 
 [node name="SubToggle" type="CheckButton" parent="Control/VBoxContainer/UI" unique_id=541622103]
 layout_mode = 2
@@ -73,3 +101,16 @@ text = "Subtitles"
 
 [node name="SubTrack" type="OptionButton" parent="Control/VBoxContainer/UI" unique_id=2104580844]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/UI" unique_id=718469380]
+layout_mode = 2
+text = "Pause/play"
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer/UI" unique_id=826942023]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxFlat_10qcn")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_2bb8b")
+
+[connection signal="pressed" from="Control/VBoxContainer/UI/Button2" to="Control" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/UI/Button" to="Control" method="_on_button_pressed"]

@@ -8,6 +8,7 @@ const FONT_EXTS := ["ttf", "otf", "ttc", "woff", "woff2"]
 @onready var sub_toggle: CheckButton = $VBoxContainer/UI/SubToggle
 @onready var sub_track: OptionButton = $VBoxContainer/UI/SubTrack
 @onready var sub_parent: Control = $VBoxContainer/Control   
+@onready var thebarthingatthebottomofvideoplayers: HSlider = $VBoxContainer/UI/HSlider
 
 var sub_overlay: Control
 var cues: Array = []
@@ -22,6 +23,10 @@ var current_video_path := ""
 var dl_thread: Thread
 var sub_thread: Thread
 
+var scrubbing := false
+
+const DENO_PATH := "~/.deno/bin/deno"
+
 
 func _ready() -> void:
 	input.text_submitted.connect(_on_submitted)
@@ -35,10 +40,21 @@ func _ready() -> void:
 	sub_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	sub_overlay.visible = sub_toggle.button_pressed
 	sub_toggle.toggled.connect(func(on): sub_overlay.visible = on)
+	
+	thebarthingatthebottomofvideoplayers.focus_mode = Control.FOCUS_NONE
+	thebarthingatthebottomofvideoplayers.step = 0.01
+	thebarthingatthebottomofvideoplayers.drag_started.connect(func(): scrubbing = true)
+	thebarthingatthebottomofvideoplayers.drag_ended.connect(_on_slider_drag_ended)
+	video.video_loaded.connect(_on_video_loaded_seekbar)
+	
+	input.focus_entered.connect(func(): get_tree().call_group("vr_keyboard", "show_keyboard"))
+	input.focus_exited.connect(func(): get_tree().call_group("vr_keyboard", "hide_keyboard"))
+	input.text_submitted.connect(func(_t): input.release_focus())
 
 
 
 func _on_submitted(text: String) -> void:
+	print("submitted: ", text)
 	text = text.strip_edges()
 	if text == "":
 		return
@@ -85,7 +101,9 @@ func _load_file(p: String) -> void:
 
 func _load_youtube(url: String) -> void:
 	if dl_thread and dl_thread.is_alive():
+		print("Download already running, ignoring")
 		return
+	print("Downloading: ", url)
 	dl_thread = Thread.new()
 	dl_thread.start(_download.bind(url))
 
@@ -97,15 +115,33 @@ func _download(url: String) -> void:
 	for f in DirAccess.get_files_at(dir):
 		DirAccess.remove_absolute(dir + "/" + f)
 
-	var output := []
-	OS.execute("yt-dlp", [
-		"-f", "b[ext=mp4]/b",
+	var deno := _find_deno()
+	print("deno path: '", deno, "'")
+	
+	var args: Array = [
+		"--no-playlist", 
+		"--remote-components", "ejs:github"
+	]
+	
+	if deno != "":
+		args.append_array(["--js-runtimes", "deno:" + deno])
+		
+	args.append_array([
+		"-f", "bestvideo+bestaudio/best",
+		"--merge-output-format", "mp4",
 		"--write-subs", "--write-auto-subs",
 		"--sub-langs", "en.*",
 		"--convert-subs", "srt",
 		"-o", dir + "/video.%(ext)s",
 		url
-	], output, true)
+	])
+	print("yt-dlp args: ", args)
+
+	var output := []
+	var code := OS.execute("yt-dlp", args, output, true)
+	print("yt-dlp exit code: ", code)
+	if code != 0:
+		print("yt-dlp output: ", "".join(output))
 	_downloaded.call_deferred(dir)
 
 
@@ -666,6 +702,8 @@ func _video_rect() -> Rect2:
 
 
 func _process(_d: float) -> void:
+	_update_thebarthingatthebottomofvideoplayers()
+	
 	if cues.is_empty() or not sub_overlay.visible or not video.is_open():
 		return
 
@@ -832,3 +870,57 @@ func _update_label(rtl: RichTextLabel, c: Dictionary, t: float, rect: Rect2) -> 
 		if fd[1] > 0.0 and left < fd[1]:
 			alpha = minf(alpha, left / fd[1])
 	rtl.modulate.a = clampf(alpha, 0.0, 1.0)
+
+
+func _on_button_pressed() -> void:
+	if video.is_playing:
+		video.pause()
+	else:
+		video.play()
+		
+func _on_video_loaded_seekbar() -> void:
+	thebarthingatthebottomofvideoplayers.min_value = 0.0
+	thebarthingatthebottomofvideoplayers.max_value = video.get_video_length_float()
+	thebarthingatthebottomofvideoplayers.set_value_no_signal(0.0)
+
+
+func _on_slider_drag_ended(value_changed: bool) -> void:
+	scrubbing = false
+	if not value_changed or not video.is_open():
+		return
+	var frame := int(thebarthingatthebottomofvideoplayers.value * video.get_video_framerate())
+	frame = clampi(frame, 0, maxi(video.get_video_frame_count() - 2, 0))
+	video.seek_frame(frame)
+
+
+func _update_thebarthingatthebottomofvideoplayers() -> void:
+	if scrubbing or not video.is_open():
+		return
+	thebarthingatthebottomofvideoplayers.set_value_no_signal(video.get_current_playback_position_float())
+
+
+func _on_button_2_pressed() -> void:
+	input.text =  DisplayServer.clipboard_get()
+	print("submitted: ", input.text)
+	var text = input.text.strip_edges()
+	if text == "":
+		return
+	if _is_youtube(input.text):
+		_load_youtube(input.text)
+	else:
+		_load_file(input.text)
+	
+	
+func _find_deno() -> String:
+	var home := OS.get_environment("HOME")
+	var candidates := [
+		home + "/.deno/bin/deno",
+		home + "/.local/bin/deno",
+		"/usr/local/bin/deno",
+		"/usr/bin/deno",
+		"/opt/homebrew/bin/deno",
+	]
+	for c in candidates:
+		if FileAccess.file_exists(c):
+			return c
+	return ""
