@@ -9,7 +9,7 @@ i am deeply sorry for whoever dares look at this repo this is the most bullshit 
 
 [![Video](https://img.youtube.com/vi/kukKjcU7ZXs/maxresdefault.jpg)](https://www.youtube.com/watch?v=kukKjcU7ZXs)   
 
-click to watch Demo Video ^^^^^^^^^^^^^^^^^
+## click to watch Demo Video ^^^^^^^^^^^^^^^^^
 
 
 ## INSTALLATION
