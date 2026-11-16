@@ -2,6 +2,10 @@
 
 created for hackclub terra
 
+a vr project made to learn how to use godot open xr tools libarary 
+
+i am deeply sorry for whoever dares look at this repo this is the most bullshit repo ive ever made and i deeply aplogise for the deep and many sins that where commited while creating this 
+
 
 ## INSTALLATION
 
