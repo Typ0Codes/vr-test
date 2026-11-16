@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dw6wbdkcerfic"]
+
+[node name="Control" type="CanvasLayer" unique_id=30427002]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2043206653]
+offset_right = 384.0
+offset_bottom = 658.0
+color = Color(0.27450982, 0.27450982, 0.27450982, 0.84313726)
+
+[node name="Button" type="Button" parent="." unique_id=397191877]
+offset_left = 54.0
+offset_top = 46.0
+offset_right = 122.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 29
+text = "Subway"
+
+[node name="Button2" type="Button" parent="." unique_id=818184444]
+offset_left = 55.0
+offset_top = 103.0
+offset_right = 213.0
+offset_bottom = 151.0
+theme_override_font_sizes/font_size = 29
+text = "apartment"
+
+[node name="Button3" type="Button" parent="." unique_id=223406557]
+offset_left = 59.0
+offset_top = 171.0
+offset_right = 217.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 29
+text = "City
+"
+
+[node name="Button4" type="Button" parent="." unique_id=2041423446]
+offset_left = 68.0
+offset_top = 245.0
+offset_right = 226.0
+offset_bottom = 293.0
+theme_override_font_sizes/font_size = 29
+text = "Garage
+"
