@@ -10191,7 +10191,10 @@ shape = SubResource("ConcavePolygonShape3D_g7mod")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/SoporteBaseAsientosCentrales_LP_001/SoporteBaseAsientosCentrales_LP_001_AsientosInteriores_0/StaticBody3D" index="0" unique_id=1081612823]
 shape = SubResource("ConcavePolygonShape3D_tls8p")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/AgarraManosCentralInterior_LP_001/AgarraManosCentralInterior_LP_001_AsientosInteriores_0" parent_id_path=PackedInt32Array(1940101399) index="0" unique_id=651358683]
+[node name="AgarraManosCentralInterior_LP_001_AsientosInteriores_0" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/AgarraManosCentralInterior_LP_001" parent_id_path=PackedInt32Array(1431952517) index="0" unique_id=1940101399]
+transform = Transform3D(1, 0, 0, 0, 1, -8.501131e-32, 0, -8.501131e-32, 1, 1.6336223e-15, 6.9517057e-07, -4.266927)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/AgarraManosCentralInterior_LP_001/AgarraManosCentralInterior_LP_001_AsientosInteriores_0" index="0" unique_id=651358683]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/AgarraManosCentralInterior_LP_001/AgarraManosCentralInterior_LP_001_AsientosInteriores_0/StaticBody3D" index="0" unique_id=717428861]
 shape = SubResource("ConcavePolygonShape3D_sr318")
@@ -11337,7 +11340,7 @@ shape = SubResource("ConcavePolygonShape3D_swjkv")
 shape = SubResource("ConcavePolygonShape3D_ksvv2")
 
 [node name="Ps Export_016_Ads_0" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/Ps Export_016" parent_id_path=PackedInt32Array(167837768) index="0" unique_id=852287099]
-transform = Transform3D(1, 0, 0, 0, 1, -2.4231919e-15, 0, 4.6820187e-15, 1, 9.417534e-06, -2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, -2.4231919e-15, 0, 1.5252435e-12, 1, -0.13404441, -1.525921, -1.9923239)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/0c1de415742940879d09817cc64f13ad_fbx/RootNode/TrainEmpty/Ps Export_016/Ps Export_016_Ads_0" index="0" unique_id=1914480702]
 
