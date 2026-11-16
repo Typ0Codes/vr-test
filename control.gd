@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_subway_pressed() -> void:
 	get_tree().change_scene_to_file("res://node_3d.tscn")
+
+
+func _on_garage_pressed() -> void:
+	get_tree().change_scene_to_file("res://GARAGE.tscn")

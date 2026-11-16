@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="23_vxd74"]
 [ext_resource type="PackedScene" uid="uid://d0x6rj5t2k3b1" path="res://TV.tscn" id="24_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://dw6wbdkcerfic" path="res://LevelSelect.tscn" id="24_obt1j"]
+[ext_resource type="PackedScene" uid="uid://m61v0a0vlv03" path="res://Attributions.tscn" id="25_2yde8"]
 [ext_resource type="Script" uid="uid://4wa3w67j7g8w" path="res://keyboard_rig.gd" id="25_j3e5s"]
 [ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="26_nu31w"]
 [ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://addons/Mirror3D/Mirror3D.tscn" id="27_nu31w"]
@@ -379,6 +380,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_obt1j")
 [node name="Viewport2Din3D2" parent="." unique_id=1871267126 instance=ExtResource("23_vxd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2598772, 0.8650346, -1.2486756)
 scene = ExtResource("24_obt1j")
+viewport_size = Vector2(1152, 648)
+transparent = 1
+unshaded = true
+scene_properties_keys = PackedStringArray()
+
+[node name="Viewport2Din3D3" parent="." unique_id=1013205761 instance=ExtResource("23_vxd74")]
+transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 2.7621412, 0.5761373, 1.6478981)
+scene = ExtResource("25_2yde8")
 viewport_size = Vector2(1152, 648)
 transparent = 1
 unshaded = true

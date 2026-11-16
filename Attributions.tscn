@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://m61v0a0vlv03"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=185463990]
+
+[node name="Control" type="Control" parent="." unique_id=2112529393]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=158520987]
+layout_mode = 0
+offset_right = 521.0
+offset_bottom = 262.0
+color = Color(0.29411766, 0.29411766, 0.29411766, 0.7607843)
+
+[node name="Label" type="Label" parent="Control" unique_id=1494200508]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Garage 3d model  by NEYCER on sketchfab
+
+Subway Station 3d model by  Alex Murias on sketchfab
+
+City Model by golukumar on sketchfab "

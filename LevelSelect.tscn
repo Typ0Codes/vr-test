@@ -56,3 +56,4 @@ text = "Garage
 "
 
 [connection signal="pressed" from="Control/subway" to="Control" method="_on_subway_pressed"]
+[connection signal="pressed" from="Control/garage" to="Control" method="_on_garage_pressed"]

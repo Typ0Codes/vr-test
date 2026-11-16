@@ -901,13 +901,32 @@ func _update_thebarthingatthebottomofvideoplayers() -> void:
 	thebarthingatthebottomofvideoplayers.set_value_no_signal(video.get_current_playback_position_float())
 
 
+func _get_clipboard() -> String:
+	var out := []
+	var code := -1
+
+	if OS.get_environment("WAYLAND_DISPLAY") != "":
+		code = OS.execute("wl-paste", ["--no-newline"], out, true)
+
+	if code != 0:
+		code = OS.execute("xclip", ["-selection", "clipboard", "-o"], out, true)
+	if code != 0:
+		code = OS.execute("xsel", ["--clipboard", "--output"], out, true)
+
+	if code == 0 and not out.is_empty():
+		return str(out[0]).strip_edges()
+
+
+	return DisplayServer.clipboard_get().strip_edges()
+
+
 func _on_button_2_pressed() -> void:
-	var clip := DisplayServer.clipboard_get().strip_edges()
+	var clip := _get_clipboard()
 	print("clipboard: '", clip, "'")
 	if clip == "":
 		return
 	input.text = clip
-	input.release_focus()    # also hides the VR keyboard if it was open
+	input.release_focus()
 	_on_submitted(clip)
 	
 	
