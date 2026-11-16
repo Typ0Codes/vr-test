@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://4wa3w67j7g8w" path="res://keyboard_rig.gd" id="26_8o67u"]
 [ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="27_vs3hv"]
 [ext_resource type="PackedScene" uid="uid://delu2qjrw6teu" path="res://addons/Mirror3D/Mirror3D.tscn" id="28_uqgct"]
+[ext_resource type="PackedScene" uid="uid://bqb2hvr0xjwyp" path="res://timesquqeaere.tscn" id="29_tgxd0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_j3e5s"]
 radius = 0.1
@@ -57,6 +58,12 @@ size = Vector3(1, 0.27441406, 1)
 albedo_color = Color(1, 0, 1, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wc5p8"]
+sky_top_color = Color(0.0128942765, 0, 0.34792143, 1)
+sky_horizon_color = Color(0.19339278, 0.09085142, 0.17547515, 1)
+sky_cover_modulate = Color(0.030936617, 0, 0.6313709, 1)
+ground_bottom_color = Color(0.03281283, 0.023854205, 0.015700947, 1)
+ground_horizon_color = Color(0.06556442, 0.12075954, 0.34100294, 1)
+sun_angle_max = 0.0
 
 [sub_resource type="Sky" id="Sky_wc5p8"]
 sky_material = SubResource("ProceduralSkyMaterial_wc5p8")
@@ -64,12 +71,11 @@ sky_material = SubResource("ProceduralSkyMaterial_wc5p8")
 [sub_resource type="Environment" id="Environment_wc5p8"]
 background_mode = 2
 background_color = Color(0.31990442, 0.6840145, 0.99999994, 1)
-background_energy_multiplier = 2.32
 sky = SubResource("Sky_wc5p8")
 ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.9
-ambient_light_energy = 1.98
+ambient_light_color = Color(9.62615e-08, 2.1658838e-07, 0.39341798, 1)
+ambient_light_sky_contribution = 0.8
+ambient_light_energy = 1.7
 
 [sub_resource type="Resource" id="Resource_3v7ru"]
 script = ExtResource("16_c6oeb")
@@ -357,8 +363,9 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.01
 shape = SubResource("BoxShape3D_s0gvp")
 
 [node name="Viewport2Din3D" parent="." unique_id=582205747 instance=ExtResource("22_wh888")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8650346, -6.7586317)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1163235, -0.97151995, -17.638088)
 top_level = true
+screen_size = Vector2(30, 20)
 scene = ExtResource("23_xag0f")
 viewport_size = Vector2(1152, 648)
 transparent = 1
@@ -371,7 +378,7 @@ mesh = SubResource("BoxMesh_nu31w")
 surface_material_override/0 = SubResource("StandardMaterial3D_obt1j")
 
 [node name="Viewport2Din3D2" parent="." unique_id=1871267126 instance=ExtResource("22_wh888")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2598772, 0.8650346, -1.2486756)
+transform = Transform3D(-0.98798406, 0, -0.15455565, 0, 1, 0, 0.15455565, 0, -0.98798406, -2.6264026, -22.6108, 35.01231)
 scene = ExtResource("24_kbpgf")
 viewport_size = Vector2(1152, 648)
 transparent = 1
@@ -379,7 +386,7 @@ unshaded = true
 scene_properties_keys = PackedStringArray()
 
 [node name="Viewport2Din3D3" parent="." unique_id=1013205761 instance=ExtResource("22_wh888")]
-transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, 2.7621412, 0.5761373, 1.6478981)
+transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, -2.7446237, -21.778881, 34.77996)
 scene = ExtResource("25_na7ed")
 viewport_size = Vector2(1152, 648)
 transparent = 1
@@ -395,5 +402,8 @@ distance = 1.0
 scene_properties_keys = PackedStringArray("virtual_keyboard_2d.gd")
 
 [node name="Mirror3D" parent="." unique_id=916837440 instance=ExtResource("28_uqgct")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.49383, 0, -5.8429484)
-size = Vector2(4.3, 3.875)
+transform = Transform3D(0.9778344, 0, 0.2093797, 0, 1, 0, -0.2093797, 0, 0.9778344, 9.0696125, -23.980263, 32.332596)
+size = Vector2(20.64, 12.605)
+
+[node name="Sketchfab_Scene" parent="." unique_id=1514893991 instance=ExtResource("29_tgxd0")]
+transform = Transform3D(17.97, 0, 0, 0, 17.97, 0, 0, 0, 17.97, 0, -23.159338, 0)

@@ -26,15 +26,6 @@ offset_bottom = 98.0
 theme_override_font_sizes/font_size = 29
 text = "Subway"
 
-[node name="apartment" type="Button" parent="Control" unique_id=818184444]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 107.0
-offset_right = 173.0
-offset_bottom = 155.0
-theme_override_font_sizes/font_size = 29
-text = "apartment"
-
 [node name="city" type="Button" parent="Control" unique_id=223406557]
 layout_mode = 0
 offset_left = 19.0
@@ -56,4 +47,5 @@ text = "Garage
 "
 
 [connection signal="pressed" from="Control/subway" to="Control" method="_on_subway_pressed"]
+[connection signal="pressed" from="Control/city" to="Control" method="_on_city_pressed"]
 [connection signal="pressed" from="Control/garage" to="Control" method="_on_garage_pressed"]
