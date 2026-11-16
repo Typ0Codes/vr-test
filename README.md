@@ -7,7 +7,7 @@ a vr project made to learn how to use godot open xr tools libarary
 
 i am deeply sorry for whoever dares look at this repo this is the most bullshit repo ive ever made and i deeply aplogise for the deep and many sins that where commited while creating this 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V=kukKjcU7ZXs" frameborder="0" allowfullscreen></iframe>   
+[![Video](https://img.youtube.com/vi/kukKjcU7ZXs/maxresdefault.jpg)](https://www.youtube.com/watch?v=kukKjcU7ZXs)   
 
 
 ## INSTALLATION
